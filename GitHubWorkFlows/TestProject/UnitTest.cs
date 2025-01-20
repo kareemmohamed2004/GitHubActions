@@ -5,7 +5,7 @@ namespace TestProject
         [Fact]
         public void AdditionTest()
         {
-            Assert.Equal(3, 1 + 1);
+            Assert.Equal(2, 1 + 1);
         }
 
         [Fact]
