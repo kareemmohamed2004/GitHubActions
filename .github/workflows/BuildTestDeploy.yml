@@ -13,7 +13,25 @@ jobs:
         dotnet-version: '8.0.x'
     - name: Install dependencies
       run: dotnet restore GitHubWorkFlows/GitHubWorkFlows.sln
-    - name: Build
-      run: dotnet build GitHubWorkFlows/GitHubWorkFlows.sln
     - name: Test with the dotnet CLI
       run: dotnet test GitHubWorkFlows/GitHubWorkFlows.sln
+    - name: Build
+      run: dotnet build GitHubWorkFlows/GitHubWorkFlows.sln
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Get code
+      uses: actions/checkout@v4
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+    - name: Install dependencies
+      run: dotnet restore GitHubWorkFlows/GitHubWorkFlows.sln
+    - name: Test with the dotnet CLI
+      run: dotnet test GitHubWorkFlows/GitHubWorkFlows.sln
+    - name: Build
+      run: dotnet build GitHubWorkFlows/GitHubWorkFlows.sln
+    - name: Deploy
+      run: echo "Deploying..."
