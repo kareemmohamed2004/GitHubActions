@@ -1,5 +1,9 @@
 name: Build Test Deploy Workflow
-on: [push, workflow_dispatch]
+on: 
+  push:
+  workflow_dispatch:
+  issues:
+    types: opened
 jobs:
   build:
     runs-on: ubuntu-latest
