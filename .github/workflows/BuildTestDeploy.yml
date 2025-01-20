@@ -1,7 +1,7 @@
 name: Build Test Deploy Workflow
 on: 
   push:
-    branches: dev
+    branches: main
   workflow_dispatch:
   issues:
     types: opened
