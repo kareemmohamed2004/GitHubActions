@@ -23,6 +23,7 @@ namespace TestProject
         [Fact]
         public void DivisionTest()
         {
+
             Assert.Equal(1, 1 / 1);
         }
     }
