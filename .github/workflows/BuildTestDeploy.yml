@@ -13,7 +13,7 @@ jobs:
         dotnet-version: '8.0.x'
     - name: Install dependencies
       run: dotnet restore
-      working-directory: ./GitHubWorkFlows/MainAPI
+      working-directory: ../GitHubWorkFlows
     - name: Build
       run: dotnet build
     - name: Test with the dotnet CLI
