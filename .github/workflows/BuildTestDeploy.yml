@@ -6,9 +6,28 @@ on:
   issues:
     types: opened
 jobs:
-  build:
+  Test:
     runs-on: ubuntu-latest
-
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+      - name: Cache NuGet packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/GitHubWorkFlows/') }}
+      - name: Install dependencies
+        run: dotnet restore GitHubWorkFlows/GitHubWorkFlows.sln
+      - name: Test with the dotnet CLI
+        run: dotnet test GitHubWorkFlows/GitHubWorkFlows.sln
+        
+  build:
+    needs: Test
+    runs-on: ubuntu-latest
     steps:
     - name: Get code
       uses: actions/checkout@v4
@@ -16,10 +35,13 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.0.x'
-    - name: Install dependencies
-      run: dotnet restore GitHubWorkFlows/GitHubWorkFlows.sln
-    - name: Test with the dotnet CLI
-      run: dotnet test GitHubWorkFlows/GitHubWorkFlows.sln
+    - name: Cache NuGet packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.nuget/packages
+        key: nuget-${{ runner.os }}-${{ hashFiles('**/GitHubWorkFlows/') }}
+    # - name: Install dependencies
+    #   run: dotnet restore GitHubWorkFlows/GitHubWorkFlows.sln
     - name: Build
       run: dotnet build GitHubWorkFlows/GitHubWorkFlows.sln
     - name: Upload build artifacts
