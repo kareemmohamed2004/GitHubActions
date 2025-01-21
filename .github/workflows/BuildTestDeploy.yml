@@ -26,7 +26,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Main API Build Artifacts
-        path: MainAPI/bin/Debug/net8.0/
+        path: GitHubWorkFlows/MainAPI/bin/Debug/net8.0/
 
   deploy:
     needs: build
