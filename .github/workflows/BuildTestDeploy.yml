@@ -38,5 +38,6 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: Main API Build Artifacts
+        path: MyApi/bin/Debug/net8.0/
     - name: Deploy
       run: echo "Deploying..."
