@@ -26,7 +26,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Main API Build Artifacts
-        path: GitHubWorkFlows/MainAPI/bin/Debug/net8.0/
+        path: MainAPI/bin/Debug/net8.0/
 
   deploy:
     needs: build
@@ -34,22 +34,13 @@ jobs:
     steps:
     - name: Get code
       uses: actions/checkout@v4
-    
     - name: List parent directory
       run: ls -R GitHubWorkFlows/MainAPI/bin/Debug/
     - name: List downloaded files
       run: ls -R GitHubWorkFlows/MainAPI/bin/Debug/net8.0/
-    # - name: Setup dotnet
-    #   uses: actions/setup-dotnet@v3
-    #   with:
-    #     dotnet-version: '8.0.x'
-    # - name: Install dependencies
-    #   run: dotnet restore GitHubWorkFlows/GitHubWorkFlows.sln
-    # - name: Build
-    #   run: dotnet build GitHubWorkFlows/GitHubWorkFlows.sln
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
-        path: GitHubWorkFlows/MainAPI/bin/Debug/net8.0/
+        name: Main API Build Artifacts
     - name: Deploy
       run: echo "Deploying..."
