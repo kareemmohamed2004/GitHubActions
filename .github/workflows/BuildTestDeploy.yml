@@ -34,6 +34,8 @@ jobs:
     steps:
     - name: Get code
       uses: actions/checkout@v4
+    - name: List downloaded files
+      run: ls -R GitHubWorkFlows/MainAPI/bin/Debug/net8.0/
     # - name: Setup dotnet
     #   uses: actions/setup-dotnet@v3
     #   with:
@@ -45,7 +47,6 @@ jobs:
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
-        name: Main API Build Artifacts
         path: GitHubWorkFlows/MainAPI/bin/Debug/net8.0/
     - name: Deploy
       run: echo "Deploying..."
